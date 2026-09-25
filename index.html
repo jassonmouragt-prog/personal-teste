@@ -1,12 +1,987 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Personal Team</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050505">
+<meta name="description" content="Método Singular — Personal Trainer especializado em estética, performance e emagrecimento para mulheres 30+. Estratégia que você consegue manter.">
+<title>Marquinhos | Método Singular — Personal Trainer para mulheres 30+</title>
+<link rel="icon" type="image/png" href="point%20logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#050505;
+  --black2:#0B0B0D;
+  --graphite:#151518;
+  --red:#E6192D;
+  --red-bright:#FF2338;
+  --red-mid:#B80016;
+  --red-deep:#79000D;
+  --white:#FFFFFF;
+  --gray:#B6B6BA;
+  --card:#101012;
+  --line:rgba(255,255,255,.07);
+  --red-grad:linear-gradient(135deg,#FF2338 0%,#B80016 50%,#550008 100%);
+  --font:'Inter',system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--black);
+  color:var(--white);
+  font-family:var(--font);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  line-height:1.5;
+}
+a{text-decoration:none;color:inherit}
+img,svg{display:block;max-width:100%}
+ul{list-style:none}
+button{font-family:inherit}
+
+.wrap{width:min(1120px,100% - 32px);margin-inline:auto}
+section{position:relative;scroll-margin-top:84px}
+h1,h2{letter-spacing:-.02em;line-height:1.06;font-weight:800}
+
+.has-gsap .reveal{opacity:0}
+
+/* ====== INTRO: tela preta + luz vermelha acendendo ====== */
+html.js #intro{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;background:#000;pointer-events:none}
+html.js #intro::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(255,35,56,.16),transparent 58%);opacity:0}
+.intro-glow{position:relative;width:120px;height:120px;transform:scale(.18);opacity:0}
+.intro-glow::before,.intro-glow::after{content:"";position:absolute;inset:0;border-radius:50%}
+.intro-glow::before{background:radial-gradient(circle,rgba(255,35,56,.95),rgba(255,35,56,.25) 55%,transparent 72%);filter:blur(3px)}
+.intro-glow::after{border:1px solid rgba(255,35,56,.55);animation:introPing 1.5s ease-out infinite}
+html.no-ok #intro,
+.hero-done #intro{display:none}
+#smooth-wrapper{width:100%}
+
+/* ---------- tech background texture ---------- */
+.tech-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:54px 54px;
+  -webkit-mask-image:radial-gradient(ellipse 95% 75% at 50% 25%,#000 25%,transparent 75%);
+  mask-image:radial-gradient(ellipse 95% 75% at 50% 25%,#000 25%,transparent 75%);
+}
+.red-halo{
+  position:absolute;pointer-events:none;z-index:0;
+  background:radial-gradient(55% 48% at 50% 0%,rgba(255,35,56,.16),transparent 70%);
+  inset:0;
+}
+.div-line{height:1px;border:0;background:linear-gradient(90deg,transparent,rgba(255,35,56,.45),transparent)}
+.section-divider{border-top:1px solid var(--line)}
+
+/* ---------- floating cards ---------- */
+@keyframes floatY{0%,100%{translate:0 0}50%{translate:0 -9px}}
+.obj-item,.p-card,.stat,.case,.acc{animation:floatY 7.5s ease-in-out infinite}
+.obj-item:nth-child(2),.p-card:nth-child(2),.stat:nth-child(2){animation-delay:.9s}
+.obj-item:nth-child(3),.p-card:nth-child(3),.stat:nth-child(3){animation-delay:1.8s}
+.car-slide:nth-child(2) .case{animation-delay:1.4s}
+.car-slide:nth-child(3) .case{animation-delay:2.8s}
+.acc:nth-child(2){animation-delay:.5s}
+.acc:nth-child(3){animation-delay:1s}
+.acc:nth-child(4){animation-delay:1.5s}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-weight:800;letter-spacing:.05em;text-transform:uppercase;
+  border-radius:14px;cursor:pointer;border:1px solid transparent;
+  transition:transform .25s ease,box-shadow .25s ease,background .25s ease,border-color .25s ease,color .25s ease;
+  font-size:.92rem;line-height:1;min-height:56px;
+}
+.btn svg{flex:none}
+.btn-primary{
+  width:100%;padding:18px 24px;
+  background:var(--red-grad);color:#fff;
+  box-shadow:0 12px 34px -10px rgba(255,35,56,.55),inset 0 1px 0 rgba(255,255,255,.18);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 46px -10px rgba(255,35,56,.75),inset 0 1px 0 rgba(255,255,255,.18)}
+.btn-ghost{
+  background:rgba(255,255,255,.04);border-color:var(--line);color:var(--white);
+}
+.btn-ghost:hover{border-color:rgba(255,35,56,.4);color:#fff;transform:translateY(-2px)}
+
+/* ---------- navbar ---------- */
+.nav{
+  position:fixed;inset:0 0 auto;z-index:60;
+  transition:background .35s ease,border-color .35s ease,backdrop-filter .35s ease;
+  border-bottom:1px solid transparent;
+}
+.nav.solid{background:rgba(5,5,5,.82);border-bottom-color:var(--line);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;line-height:1.1;letter-spacing:.14em;font-weight:800;font-size:.95rem}
+.brand > span,.fo-brand > span{display:flex;flex-direction:column;gap:2px}
+.brand-logo{height:56px;width:auto;object-fit:contain}
+.brand small{font-size:.58rem;font-weight:700;color:var(--red-bright);letter-spacing:.42em}
+.nav-links{display:none;align-items:center;gap:34px}
+.nav-links a{font-size:.85rem;font-weight:500;color:var(--gray);letter-spacing:.04em;position:relative;padding:6px 0;transition:color .25s ease}
+.nav-links a:hover{color:#fff}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--red-grad);transition:width .3s ease}
+.nav-links a:hover::after{width:100%}
+.nav .btn{min-height:40px;padding:0 18px;font-size:.72rem;border-radius:10px;width:auto}
+
+/* ---------- floating logo ---------- */
+.float-logo{
+  position:fixed;right:14px;bottom:14px;z-index:30;pointer-events:none;
+  width:56px;height:56px;object-fit:contain;opacity:.95;
+  filter:drop-shadow(0 0 16px rgba(255,35,56,.4));
+  animation:floatspin 26s linear infinite;
+  will-change:transform;
+}
+@keyframes floatspin{
+  0%{transform:translateY(0) rotate(0deg)}
+  25%{transform:translateY(-8px) rotate(90deg)}
+  50%{transform:translateY(0) rotate(180deg)}
+  75%{transform:translateY(-8px) rotate(270deg)}
+  100%{transform:translateY(0) rotate(360deg)}
+}
+@media (min-width:880px){
+  .float-logo{width:84px;height:84px;right:26px;bottom:32px}
+}
+
+/* ---------- hero ---------- */
+.hero{padding:120px 0 56px;overflow:hidden}
+.hero .wrap{position:relative;z-index:2}
+.hero-grid{display:grid;gap:44px;align-items:center}
+.hero h1{font-size:clamp(2.15rem,9vw,4.1rem);margin:0 0 18px;font-weight:900}
+.accent{
+  background:var(--red-grad);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+.hero-sub{color:var(--gray);font-size:clamp(1rem,3.4vw,1.13rem);max-width:52ch;font-weight:400;line-height:1.6}
+.hero .btn-primary{margin-top:30px}
+.hero-points{margin-top:26px;display:grid;gap:12px}
+.hero-points li{display:flex;align-items:center;gap:12px;font-size:.9rem;color:var(--gray);font-weight:500}
+.hero-points svg{width:20px;height:20px;color:var(--red-bright);flex:none;opacity:.9}
+
+.hero-media{position:relative;max-width:470px;margin-inline:auto;width:100%}
+.photo-frame{
+  position:relative;border-radius:22px;overflow:hidden;
+  background:
+    radial-gradient(120% 90% at 50% 12%,rgba(255,35,56,.16),transparent 55%),
+    linear-gradient(180deg,#111114,var(--black2));
+  border:1px solid var(--line);
+  box-shadow:0 40px 80px -30px rgba(0,0,0,.8);
+  aspect-ratio:4/5;
+}
+.photo-frame::before{
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:
+    linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+  background-size:46px 46px;
+  -webkit-mask-image:radial-gradient(120% 100% at 50% 60%,#000 40%,transparent 85%);
+  mask-image:radial-gradient(120% 100% at 50% 60%,#000 40%,transparent 85%);
+}
+.photo-frame::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:3px;z-index:3;
+  background:var(--red-grad);
+  box-shadow:0 0 24px rgba(255,35,56,.7);
+}
+.photo-figure{position:absolute;inset:0;z-index:1;display:grid;place-items:end center;will-change:transform}
+.photo-figure img.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.06)}
+.photo-figure svg{width:86%;height:auto}
+.corner{position:absolute;width:26px;height:26px;z-index:3;border:2px solid rgba(255,35,56,.55);pointer-events:none}
+.corner.tl{top:14px;left:14px;border-right:0;border-bottom:0}
+.corner.br{bottom:14px;right:14px;border-left:0;border-top:0}
+.chip{
+  position:absolute;z-index:6;display:inline-flex;align-items:center;gap:8px;
+  font-size:.6rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gray);
+  background:rgba(11,11,13,.72);border:1px solid var(--line);border-radius:10px;
+  padding:8px 12px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  animation:floatY 7.5s ease-in-out infinite;
+}
+.chip i{width:5px;height:5px;border-radius:50%;background:var(--red-bright);box-shadow:0 0 8px rgba(255,35,56,.9)}
+.chip.c1{top:18%;right:-16px}
+.chip.c2{bottom:40%;left:-16px;animation-delay:.8s}
+.chip.c3{bottom:14px;left:50%;transform:translateX(-50%);animation-delay:1.6s}
+.chip.c3 svg{width:34px;height:6px;color:var(--red-bright)}
+.hero-caption{margin-top:36px;text-align:center;font-size:.72rem;letter-spacing:.3em;color:rgba(182,182,186,.7);text-transform:uppercase}
+
+/* ---------- objection block ---------- */
+.objection{padding:clamp(72px,12vw,140px) 0;background:radial-gradient(70% 50% at 100% 0%,rgba(255,35,56,.05),transparent 60%)}
+.objection h2{font-size:clamp(1.75rem,7vw,3rem);max-width:18ch;margin-bottom:20px}
+.std-text{color:var(--gray);font-size:clamp(1rem,3.2vw,1.12rem);max-width:56ch;line-height:1.7}
+.obj-list{margin-top:36px;display:grid;gap:14px}
+.obj-item{display:flex;align-items:center;gap:16px;padding:18px 20px;background:var(--card);border:1px solid var(--line);border-radius:14px;position:relative;overflow:hidden;transition:border-color .3s ease,transform .3s ease}
+.obj-item:hover{border-color:rgba(255,35,56,.35);transform:translateY(-2px)}
+.obj-item::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--red-grad);opacity:.85}
+.obj-num{font-size:.68rem;font-weight:800;letter-spacing:.2em;color:rgba(255,35,56,.9)}
+.obj-item p{font-weight:600;font-size:.98rem}
+.marquee{
+  position:relative;overflow:hidden;
+  padding:26px 0;margin-top:48px;
+  background:var(--black2);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+}
+.mq{
+  display:flex;white-space:nowrap;width:max-content;
+  animation:mqmove 58s linear infinite;
+}
+.mq:hover{animation-play-state:paused}
+.mq-b{animation-direction:reverse;animation-duration:46s;margin-top:12px}
+.mq-run{display:flex;align-items:center;flex:none}
+.mu{
+  display:inline-flex;align-items:center;flex:none;
+  text-transform:uppercase;font-weight:800;
+  font-size:clamp(1.5rem,4.4vw,2.7rem);letter-spacing:.04em;color:var(--white);
+}
+.mu b{
+  background:var(--red-grad);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+.mw{margin-left:14px}
+.mu-o{
+  color:transparent;
+  -webkit-text-stroke:1px rgba(255,255,255,.32);
+}
+.mu-o b{color:transparent;-webkit-text-fill-color:transparent;background:none}
+.md{
+  flex:none;position:relative;width:88px;height:1px;margin:0 44px;
+  background:linear-gradient(90deg,transparent,rgba(255,35,56,.5),transparent);
+}
+.md::after{
+  content:"";position:absolute;left:50%;top:50%;
+  width:7px;height:7px;transform:translate(-50%,-50%) rotate(45deg);
+  background:var(--red-bright);
+  box-shadow:0 0 12px rgba(255,35,56,.8);
+}
+@keyframes mqmove{to{transform:translateX(-50%)}}
+
+/* ---------- método ---------- */
+.metodo{padding:clamp(72px,12vw,140px) 0}
+.metodo h2{font-size:clamp(1.75rem,7vw,3rem);max-width:20ch;margin-bottom:18px}
+.metodo h2 .accent-underline{position:relative}
+.metodo h2 .accent-underline::after{content:"";position:absolute;left:0;right:0;bottom:.06em;height:3px;background:var(--red-grad);border-radius:2px;opacity:.8}
+.metodo .std-text{margin-bottom:44px;max-width:60ch}
+.p-grid{display:grid;gap:16px}
+.p-card{
+  position:relative;background:var(--card);border:1px solid var(--line);
+  border-radius:18px;padding:30px 26px;overflow:hidden;
+  transition:transform .35s ease,border-color .35s ease,box-shadow .35s ease;
+}
+.p-card::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,35,56,.7),transparent);opacity:0;transition:opacity .35s ease}
+.p-card:hover{transform:translateY(-4px);border-color:rgba(255,35,56,.4);box-shadow:0 26px 60px -26px rgba(255,35,56,.35)}
+.p-card:hover::after{opacity:1}
+.p-num{display:flex;align-items:center;gap:14px;font-size:.72rem;font-weight:800;letter-spacing:.3em;color:var(--red-bright)}
+.p-num::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(255,35,56,.5),transparent)}
+.p-title{font-size:1.28rem;font-weight:800;margin:18px 0 10px}
+.p-text{color:var(--gray);font-size:.95rem;line-height:1.65}
+
+/* ---------- autoridade ---------- */
+.autoridade{padding:clamp(72px,12vw,140px) 0;background:radial-gradient(80% 60% at 0% 100%,rgba(255,35,56,.06),transparent 60%)}
+.auto-grid{display:grid;gap:48px;align-items:center}
+.auto-media{position:relative;max-width:470px;margin-inline:auto;width:100%}
+.autoridade h2{font-size:clamp(1.75rem,7vw,3rem);margin-bottom:18px}
+.autoridade .std-text{margin-bottom:34px}
+.stats{display:grid;gap:14px}
+.stat{
+  display:flex;align-items:baseline;gap:16px;justify-content:space-between;
+  background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;
+  transition:border-color .3s ease,transform .3s ease;
+}
+.stat:hover{border-color:rgba(255,35,56,.3);transform:translateY(-2px)}
+.stat b{
+  font-size:clamp(1.9rem,6vw,2.6rem);font-weight:900;line-height:1;
+  background:var(--red-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+  white-space:nowrap;
+}
+.stat span{font-size:.72rem;font-weight:700;letter-spacing:.18em;color:var(--gray);text-transform:uppercase;text-align:right}
+.stat small{display:block;font-size:.6rem;letter-spacing:.14em;color:rgba(182,182,186,.55);text-transform:uppercase;margin-top:5px}
+.chip-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.tag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:.68rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gray);
+  padding:10px 14px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.03);
+}
+.tag i{width:5px;height:5px;border-radius:50%;background:var(--red-bright);box-shadow:0 0 8px rgba(255,35,56,.9)}
+.leader-bars{margin-top:26px;display:grid;gap:10px}
+.leader-bars div{display:flex;align-items:center;gap:12px;font-size:.68rem;letter-spacing:.18em;color:rgba(182,182,186,.7);text-transform:uppercase;font-weight:700}
+.leader-bars i{display:block;flex:1;height:4px;border-radius:99px;background:var(--graphite);overflow:hidden;position:relative}
+.leader-bars i::after{content:"";position:absolute;inset:0;width:var(--w,70%);background:var(--red-grad);border-radius:99px}
+
+/* ---------- objeções ---------- */
+.objetoes{padding:clamp(72px,12vw,140px) 0}
+.objetoes h2{font-size:clamp(1.75rem,7vw,3rem);margin-bottom:40px;max-width:20ch}
+.acc{background:var(--black2);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:border-color .3s ease}
+.acc+.acc{margin-top:12px}
+.acc.open{border-color:rgba(255,35,56,.35)}
+.acc-btn{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;
+  background:none;border:0;color:var(--white);cursor:pointer;
+  padding:22px 22px;text-align:left;font-size:1.02rem;font-weight:700;line-height:1.35;
+}
+.acc-btn .sym{position:relative;width:22px;height:22px;flex:none}
+.acc-btn .sym::before,.acc-btn .sym::after{content:"";position:absolute;inset:50% auto auto 50%;background:var(--red-bright);transition:transform .35s ease,opacity .3s ease}
+.acc-btn .sym::before{width:14px;height:2px;transform:translate(-50%,-50%)}
+.acc-btn .sym::after{width:2px;height:14px;transform:translate(-50%,-50%)}
+.acc.open .acc-btn .sym::before{transform:translate(-50%,-50%) rotate(225deg)}
+.acc.open .acc-btn .sym::after{opacity:0;transform:translate(-50%,-50%) rotate(225deg)}
+.acc-panel{max-height:0;overflow:hidden;transition:max-height .5s ease}
+.acc-panel p{color:var(--gray);font-size:.95rem;line-height:1.7;padding:0 22px 24px;max-width:60ch}
+
+/* ---------- resultados ---------- */
+.resultados{padding:clamp(72px,12vw,140px) 0;background:radial-gradient(70% 50% at 50% 100%,rgba(255,35,56,.05),transparent 60%)}
+.resultados h2{font-size:clamp(1.75rem,7vw,3rem);margin-bottom:12px}
+.resultados .std-text{margin-bottom:40px}
+.carousel{position:relative;margin-top:10px}
+.car-viewport{overflow:hidden;border:1px solid var(--line);border-radius:22px;background:var(--black2)}
+.car-track{display:flex;transition:transform .55s cubic-bezier(.22,.8,.3,1);will-change:transform}
+.car-slide{flex:0 0 100%;width:100%;min-width:100%}
+.case{padding:16px}
+.case-media{position:relative;display:grid;grid-template-columns:1fr;gap:12px;align-items:stretch}
+.case-panel{position:relative;border-radius:16px;overflow:hidden;min-height:240px;border:1px solid var(--line);display:grid;place-items:center}
+.case-panel.before{background:linear-gradient(180deg,#0F0F12,#08080A)}
+.case-panel.after{background:linear-gradient(180deg,#121014,#0B090B);border-color:rgba(255,35,56,.22)}
+.case-panel svg{width:38%;opacity:.5;color:rgba(255,255,255,.3)}
+.case-panel.after svg{opacity:.75}
+.case-tag{
+  position:absolute;top:12px;left:12px;z-index:2;
+  font-size:.62rem;font-weight:800;letter-spacing:.26em;text-transform:uppercase;color:var(--gray);
+  background:rgba(5,5,5,.7);border:1px solid var(--line);border-radius:7px;padding:6px 10px;backdrop-filter:blur(6px);
+}
+.case-panel.after .case-tag{color:var(--red-bright);border-color:rgba(255,35,56,.4)}
+.case-panel .ph-note{
+  position:absolute;left:12px;right:12px;bottom:12px;text-align:center;z-index:2;
+  font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(182,182,186,.55);
+}
+.case-divider{
+  align-self:center;justify-self:center;display:grid;place-items:center;
+  width:26px;height:26px;border-radius:50%;flex:none;
+  background:var(--red-grad);color:#fff;font-weight:900;font-size:14px;line-height:1;
+  box-shadow:0 6px 18px -4px rgba(255,35,56,.55);
+}
+.case-divider svg{transform:rotate(90deg);transition:transform .3s ease}
+.case-meta{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 6px 4px}
+.case-label{font-size:.68rem;font-weight:800;letter-spacing:.3em;color:var(--red-bright);text-transform:uppercase}
+.case-hint{font-size:.8rem;color:var(--gray)}
+.car-btn{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:5;
+  width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,35,56,.4);
+  background:rgba(11,11,13,.85);color:var(--white);cursor:pointer;
+  display:grid;place-items:center;font-size:24px;line-height:1;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  transition:background .25s ease,border-color .25s ease,box-shadow .25s ease,transform .25s ease;
+}
+.car-btn:hover,.car-btn:focus-visible{background:var(--red-grad);border-color:transparent;box-shadow:0 8px 22px -6px rgba(255,35,56,.6)}
+.car-btn.prev{left:12px}
+.car-btn.next{right:12px}
+.car-dots{display:flex;justify-content:center;gap:8px;margin-top:18px}
+.car-dot{
+  width:26px;height:4px;border-radius:99px;border:0;cursor:pointer;
+  background:rgba(255,255,255,.14);transition:background .25s ease,width .3s ease;
+  padding:0;
+}
+.car-dot.active{width:44px;background:var(--red-grad);box-shadow:0 0 10px rgba(255,35,56,.5)}
+.t-note{margin-top:26px;font-size:.74rem;color:rgba(182,182,186,.6);letter-spacing:.02em}
+
+/* ---------- CTA final ---------- */
+.cta{
+  padding:clamp(100px,16vw,170px) 0 clamp(90px,12vw,130px);
+  overflow:hidden;text-align:center;
+}
+.cta .wrap{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
+.cta-glow{
+  position:absolute;pointer-events:none;
+  background:radial-gradient(50% 42% at 50% 105%,rgba(255,35,56,.28),transparent 72%);
+  inset:-20% -10% -28%;
+}
+.cta-ring{position:absolute;pointer-events:none;width:min(620px,92vw);aspect-ratio:1;border-radius:50%;border:1px dashed rgba(255,35,56,.16);animation:spin 70s linear infinite;top:50%;left:50%;transform:translate(-50%,-50%)}
+.cta-ring.r2{width:min(430px,64vw);border-color:rgba(255,35,56,.1);animation-direction:reverse;animation-duration:55s}
+.cta-ring.r3{width:min(200px,30vw);border:1px solid rgba(255,35,56,.12);animation:none}
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.cta h2{font-size:clamp(1.8rem,7.4vw,3.3rem);max-width:22ch;margin:0 auto 20px}
+.cta .std-text{max-width:52ch;margin:0 auto 36px}
+.cta .btn-primary{width:100%;max-width:520px;font-size:clamp(.82rem,2.6vw,.95rem)}
+.cta-note{margin-top:18px;font-size:.82rem;color:var(--gray);letter-spacing:.03em}
+.cta-note b{color:var(--red-bright);font-weight:700}
+
+/* ---------- footer ---------- */
+.footer{padding:54px 0 46px;border-top:1px solid var(--line);background:var(--black2)}
+.fo-grid{display:grid;gap:30px;text-align:center}
+.fo-brand{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:1rem;font-weight:800;letter-spacing:.18em}
+.fo-brand .brand-logo{height:84px}
+.fo-brand small{display:block;font-size:.6rem;font-weight:700;color:var(--red-bright);letter-spacing:.42em;margin-top:4px}
+.fo-tag{color:var(--gray);font-size:.9rem}
+.fo-links{display:flex;justify-content:center;gap:30px}
+.fo-links a{display:inline-flex;align-items:center;gap:8px;font-size:.86rem;font-weight:600;color:var(--gray);transition:color .25s ease}
+.fo-links a:hover{color:var(--red-bright)}
+.fo-links svg{width:17px;height:17px}
+.fo-copy{border-top:1px solid var(--line);margin-top:34px;padding-top:26px;font-size:.74rem;color:rgba(182,182,186,.6);letter-spacing:.06em}
+
+/* ---------- desktop ---------- */
+@media (min-width:640px){
+  .btn-primary{width:auto;min-width:280px}
+  .obj-list{grid-template-columns:1fr}
+  .p-grid{grid-template-columns:repeat(3,1fr)}
+  .case-panel{min-height:280px}
+  .car-btn.prev{left:20px}
+  .car-btn.next{right:20px}
+  .stats{grid-template-columns:repeat(3,1fr)}
+  .stat{flex-direction:column;align-items:flex-start;gap:14px}
+  .stat span{text-align:left}
+  .fo-grid{grid-template-columns:1fr auto 1fr;align-items:center;text-align:left}
+  .fo-brand{align-items:flex-start}
+  .fo-links{justify-content:flex-end}
+  .fo-copy{text-align:center}
+}
+@media (min-width:880px){
+  .nav-links{display:flex}
+  .hero{padding:150px 0 90px}
+  .hero-grid{grid-template-columns:1.05fr .95fr;gap:56px}
+  .hero-media{margin-inline:initial}
+  .obj-list{grid-template-columns:repeat(3,1fr)}
+  .case-media{grid-template-columns:1fr auto 1fr}
+  .case-divider svg{transform:rotate(0)}
+  .case-panel{min-height:360px}
+  .auto-grid{grid-template-columns:.92fr 1.08fr;gap:64px}
+  .objection h2{max-width:16ch}
+  body{cursor:url("poing-cursor.png") 32 32, auto}
+  .chip.c2{left:-20px}
+  .chip.c1{right:-20px}
+}
+@media (min-width:1024px){
+  .hero-sub{font-size:1.15rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
 </head>
 <body>
-  <h1>Personal Team</h1>
-  <p>Deploy de teste.</p>
+<script>document.documentElement.classList.add('js')</script>
+
+<div id="intro" aria-hidden="true">
+  <div class="intro-glow"></div>
+</div>
+
+<div id="smooth-wrapper">
+<div id="smooth-content">
+
+<!-- ============ NAVBAR ============ -->
+<main>
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+  <div class="tech-bg"></div>
+  <div class="red-halo"></div>
+  <div class="wrap hero-grid">
+    <div class="hero-content">
+      <h1 class="reveal" style="--d:.08s">O físico que a sua <span class="accent">mente já decidiu</span> conquistar.</h1>
+      <p class="hero-sub reveal" style="--d:.16s">Treinos estratégicos para mulheres 30+ que querem evoluir o físico sem transformar a academia em mais uma obrigação impossível de manter.</p>
+      <a class="btn btn-primary reveal" style="--d:.24s" href="#contato">Quero conhecer o método</a>
+      <ul class="hero-points reveal" style="--d:.32s">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>Atendimento personalizado</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18M9 15l2 2 4-4"/></svg>Treinos adaptados à rotina</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg>Estratégia baseada no seu objetivo</li>
+      </ul>
+    </div>
+
+    <div class="hero-media reveal" style="--d:.2s">
+      <div class="photo-frame">
+        <div class="photo-figure" data-parallax="0.06">
+          <img class="hero-img" src="imagem%20hero%20new.png" alt="Fotografia profissional de Marquinhos">
+        </div>
+        <span class="corner tl"></span>
+        <span class="corner br"></span>
+      </div>
+      <span class="chip c1"><i></i>Performance</span>
+      <span class="chip c2"><i></i>30+</span>
+      <span class="chip c3">
+        <svg viewBox="0 0 40 6" fill="none" aria-hidden="true"><path d="M0 3h8l3-2 2 2h6l4-3 4 3h13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Estratégia
+      </span>
+      <p class="hero-caption reveal" style="--d:.3s">Personal Trainer · Estética &amp; Performance</p>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><hr class="div-line"></div>
+
+<!-- ============ QUEBRA DE OBJEÇÃO ============ -->
+<section class="objection">
+  <div class="wrap">
+    <h2 class="reveal">Você não precisa <span class="accent">viver na academia</span> para mudar o seu corpo.</h2>
+    <p class="std-text reveal" style="--d:.08s">Talvez o problema nunca tenha sido falta de força de vontade. O problema pode estar em tentar seguir uma rotina que simplesmente não foi criada para a sua realidade.</p>
+
+    <div class="obj-list">
+      <div class="obj-item reveal"><span class="obj-num">01</span><p>Pouco tempo disponível</p></div>
+      <div class="obj-item reveal" style="--d:.08s"><span class="obj-num">02</span><p>Dificuldade para manter constância</p></div>
+      <div class="obj-item reveal" style="--d:.16s"><span class="obj-num">03</span><p>Treinos genéricos que não respeitam sua rotina</p></div>
+    </div>
+  </div>
+
+  <div class="marquee reveal" aria-hidden="true">
+    <div class="mq mq-a">
+      <div class="mq-run"><span class="mu"><b>Estratégia</b><span class="mw">vence intensidade sem direção</span><span class="md"></span></span></div>
+    </div>
+    <div class="mq mq-b">
+      <div class="mq-run"><span class="mu mu-o">Estratégia vence intensidade sem direção<span class="md"></span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MÉTODO ============ -->
+<section class="metodo section-divider" id="metodo">
+  <div class="wrap">
+    <h2 class="reveal">Um treino que se adapta à sua vida. <span class="accent-underline accent">Não o contrário.</span></h2>
+    <p class="std-text reveal" style="--d:.08s">O Método Singular parte da sua rotina, objetivo e nível atual para construir uma estratégia possível de ser mantida no longo prazo.</p>
+
+    <div class="p-grid">
+      <article class="p-card reveal">
+        <div class="p-num">01</div>
+        <h3 class="p-title">Estratégia</h3>
+        <p class="p-text">Treinos pensados de acordo com o seu objetivo e realidade.</p>
+      </article>
+      <article class="p-card reveal" style="--d:.1s">
+        <div class="p-num">02</div>
+        <h3 class="p-title">Constância</h3>
+        <p class="p-text">Uma metodologia construída para ser mantida — não abandonada depois de algumas semanas.</p>
+      </article>
+      <article class="p-card reveal" style="--d:.2s">
+        <div class="p-num">03</div>
+        <h3 class="p-title">Evolução</h3>
+        <p class="p-text">Acompanhamento e ajustes para que o treino continue fazendo sentido conforme você evolui.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AUTORIDADE ============ -->
+<section class="autoridade section-divider" id="autoridade">
+  <div class="wrap auto-grid">
+    <div class="auto-media reveal">
+      <div class="photo-frame">
+        <div class="photo-figure" data-parallax="0.04">
+          <img class="hero-img" src="imagem%20hero.png" alt="Fotografia profissional de Marquinhos">
+        </div>
+        <span class="corner tl"></span>
+        <span class="corner br"></span>
+      </div>
+      <span class="chip c2"><i></i>Método Singular</span>
+    </div>
+
+    <div class="auto-content">
+      <h2 class="reveal">Não é sobre <span class="accent">entregar uma ficha de treino.</span></h2>
+      <p class="std-text reveal" style="--d:.08s">É sobre entender onde você está, onde quer chegar e construir o caminho entre os dois.</p>
+
+      <div class="stats">
+        <div class="stat reveal">
+          <b>+X</b>
+          <span>Alunas acompanhadas<small>Placeholder — edite aqui</small></span>
+        </div>
+        <div class="stat reveal" style="--d:.08s">
+          <b>+X</b>
+          <span>Anos de experiência<small>Placeholder — edite aqui</small></span>
+        </div>
+        <div class="stat reveal" style="--d:.16s">
+          <b>X%</b>
+          <span>Foco em estratégias personalizadas<small>Placeholder — edite aqui</small></span>
+        </div>
+      </div>
+
+      <div class="chip-row reveal">
+        <span class="tag"><i></i>Método Singular</span>
+        <span class="tag"><i></i>Estética + Performance</span>
+        <span class="tag"><i></i>Especialização em mulheres 30+</span>
+      </div>
+
+      <div class="leader-bars reveal">
+        <div><span>Foco</span><i style="--w:90%"></i></div>
+        <div><span>Constância</span><i style="--w:76%"></i></div>
+        <div><span>Direção</span><i style="--w:84%"></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUEBRA DE OBJEÇÕES ============ -->
+<section class="objetoes section-divider">
+  <div class="wrap">
+    <h2 class="reveal">Talvez você esteja <span class="accent">pensando…</span></h2>
+
+    <div class="acc reveal">
+      <button class="acc-btn" aria-expanded="false">“Eu não tenho muito tempo.”<span class="sym"></span></button>
+      <div class="acc-panel"><p>O treino é estruturado considerando exatamente a sua disponibilidade. Mais tempo não significa necessariamente mais resultado. O objetivo é usar melhor o tempo que você tem.</p></div>
+    </div>
+    <div class="acc reveal" style="--d:.05s">
+      <button class="acc-btn" aria-expanded="false">“Já comecei outras vezes e parei.”<span class="sym"></span></button>
+      <div class="acc-panel"><p>Por isso a estratégia precisa caber na sua rotina. O objetivo não é criar uma rotina perfeita por algumas semanas, mas uma estrutura que você consiga sustentar.</p></div>
+    </div>
+    <div class="acc reveal" style="--d:.1s">
+      <button class="acc-btn" aria-expanded="false">“Estou há muito tempo sem treinar.”<span class="sym"></span></button>
+      <div class="acc-panel"><p>O ponto de partida faz parte do processo. A estratégia deve respeitar seu nível atual e evoluir progressivamente.</p></div>
+    </div>
+    <div class="acc reveal" style="--d:.15s">
+      <button class="acc-btn" aria-expanded="false">“Tenho medo de não conseguir acompanhar.”<span class="sym"></span></button>
+      <div class="acc-panel"><p>Você não precisa acompanhar o ritmo de ninguém. O acompanhamento parte da sua realidade, do seu objetivo e da sua evolução.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROVA SOCIAL ============ -->
+<section class="resultados section-divider" id="resultados">
+  <div class="wrap">
+    <h2 class="reveal">Resultados construídos <span class="accent">com estratégia.</span></h2>
+    <p class="std-text reveal" style="--d:.08s">Antes e depois de alunas acompanhadas pelo Método Singular.</p>
+
+    <div class="carousel reveal" style="--d:.14s" id="bafCarousel">
+      <div class="car-viewport">
+        <div class="car-track" id="bafTrack">
+          <article class="car-slide">
+            <div class="case">
+              <div class="case-media">
+                <div class="case-panel before">
+                  <span class="case-tag">Antes</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+                  <span class="ph-note">Foto antes aqui</span>
+                </div>
+                <div class="case-divider"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+                <div class="case-panel after">
+                  <span class="case-tag">Depois</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+                  <span class="ph-note">Foto depois aqui</span>
+                </div>
+              </div>
+              <div class="case-meta">
+                <span class="case-label">Caso 01</span>
+                <span class="case-hint">Nome · Idade · Placeholder</span>
+              </div>
+            </div>
+          </article>
+          <article class="car-slide">
+            <div class="case">
+              <div class="case-media">
+                <div class="case-panel before">
+                  <span class="case-tag">Antes</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+                  <span class="ph-note">Foto antes aqui</span>
+                </div>
+                <div class="case-divider"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+                <div class="case-panel after">
+                  <span class="case-tag">Depois</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+                  <span class="ph-note">Foto depois aqui</span>
+                </div>
+              </div>
+              <div class="case-meta">
+                <span class="case-label">Caso 02</span>
+                <span class="case-hint">Nome · Idade · Placeholder</span>
+              </div>
+            </div>
+          </article>
+          <article class="car-slide">
+            <div class="case">
+              <div class="case-media">
+                <div class="case-panel before">
+                  <span class="case-tag">Antes</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+                  <span class="ph-note">Foto antes aqui</span>
+                </div>
+                <div class="case-divider"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+                <div class="case-panel after">
+                  <span class="case-tag">Depois</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+                  <span class="ph-note">Foto depois aqui</span>
+                </div>
+              </div>
+              <div class="case-meta">
+                <span class="case-label">Caso 03</span>
+                <span class="case-hint">Nome · Idade · Placeholder</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+      <button class="car-btn prev" id="carPrev" aria-label="Caso anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+      </button>
+      <button class="car-btn next" id="carNext" aria-label="Próximo caso">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+      <div class="car-dots" id="carDots" role="group" aria-label="Selecionar caso"></div>
+    </div>
+    <p class="t-note reveal">* Fotos antes e depois serão exibidas somente com autorização e conteúdo fornecidos.</p>
+  </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section class="cta section-divider" id="contato">
+  <div class="cta-glow"></div>
+  <div class="cta-ring"></div>
+  <div class="cta-ring r2"></div>
+  <div class="cta-ring r3"></div>
+  <div class="tech-bg"></div>
+  <div class="wrap">
+    <h2 class="reveal">Seu próximo resultado começa com uma estratégia que <span class="accent">você consegue manter.</span></h2>
+    <p class="std-text reveal" style="--d:.1s">Fale comigo e descubra como o Método Singular pode ser adaptado ao seu objetivo e à sua rotina.</p>
+    <a class="btn btn-primary wa-link reveal" style="--d:.18s" href="#">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      Quero falar com o Marquinhos
+    </a>
+    <p class="cta-note reveal" style="--d:.26s"><b>Sem compromisso.</b> Primeiro entendemos seu objetivo.</p>
+  </div>
+</section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap fo-grid">
+    <div class="fo-brand">
+      <img class="brand-logo" src="logo.png" alt="Logo Marquinhos">
+    </div>
+    <p class="fo-tag">Estética e performance para mulheres 30+</p>
+    <div class="fo-links">
+      <a href="#" class="ig-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>
+        Instagram
+      </a>
+      <a href="#" class="wa-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+  <div class="wrap">
+    <p class="fo-copy">© 2026 Método Singular</p>
+  </div>
+</footer>
+</div>
+</div>
+
+<img class="float-logo" src="point%20logo.png" alt="" aria-hidden="true">
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#hero">
+      <img class="brand-logo" src="logo.png" alt="Logo Marquinhos">
+    </a>
+    <nav class="nav-links" aria-label="Navegação">
+      <a href="#metodo">Método</a>
+      <a href="#resultados">Resultados</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <a class="btn btn-primary wa-link" href="#">Falar comigo</a>
+  </div>
+</header>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
+<script>
+(function(){
+  var WA_NUMBER = "5584996493709";
+  var WA_MSG = "Olá, Marquinhos! Acessei o site e quero evoluir meu físico com uma estratégia que caiba na minha rotina. Quero entender o Método Singular e já começar minha preparação.";
+  var IG_HANDLE = "https://instagram.com/seu_usuario";
+  var WA_URL = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(WA_MSG);
+  var links = document.querySelectorAll(".wa-link");
+  for (var i = 0; i < links.length; i++){ links[i].setAttribute("href", WA_URL); links[i].setAttribute("target", "_blank"); links[i].setAttribute("rel", "noopener"); }
+  var ig = document.querySelector(".ig-link");
+  if (ig){ ig.setAttribute("href", IG_HANDLE); ig.setAttribute("target", "_blank"); ig.setAttribute("rel", "noopener"); }
+
+  var nav = document.getElementById("nav");
+  var onScrollNav = function(){ nav.classList.toggle("solid", window.scrollY > 24); };
+  window.addEventListener("scroll", onScrollNav, { passive: true });
+  onScrollNav();
+
+  var accs = document.querySelectorAll(".acc");
+  for (var a = 0; a < accs.length; a++){
+    (function(item){
+      var btn = item.querySelector(".acc-btn");
+      var panel = item.querySelector(".acc-panel");
+      btn.addEventListener("click", function(){
+        var open = item.classList.contains("open");
+        for (var b = 0; b < accs.length; b++){
+          accs[b].classList.remove("open");
+          accs[b].querySelector(".acc-panel").style.maxHeight = null;
+          accs[b].querySelector(".acc-btn").setAttribute("aria-expanded","false");
+        }
+        if (!open){
+          item.classList.add("open");
+          panel.style.maxHeight = panel.scrollHeight + "px";
+          btn.setAttribute("aria-expanded","true");
+        }
+      });
+    })(accs[a]);
+  }
+
+  var mqs = document.querySelectorAll(".mq");
+  for (var m = 0; m < mqs.length; m++){
+    var run = mqs[m].querySelector(".mq-run");
+    if (!run) continue;
+    run.innerHTML = run.innerHTML.repeat(8);
+    var clone = document.createElement("div");
+    clone.className = "mq-run";
+    clone.innerHTML = run.innerHTML;
+    mqs[m].appendChild(clone);
+  }
+
+  var car = document.getElementById("bafCarousel");
+  if (car){
+    var track = document.getElementById("bafTrack");
+    var slides = track.children;
+    var dotsWrap = document.getElementById("carDots");
+    var prevBtn = document.getElementById("carPrev");
+    var nextBtn = document.getElementById("carNext");
+    var idx = 0;
+    var total = slides.length;
+
+    var go = function(i){
+      idx = (i + total) % total;
+      track.style.transform = "translateX(-" + (idx * 100) + "%)";
+      var dots = dotsWrap.querySelectorAll(".car-dot");
+      for (var d = 0; d < dots.length; d++){
+        dots[d].classList.toggle("active", d === idx);
+        dots[d].setAttribute("aria-current", d === idx ? "true" : "false");
+      }
+    };
+
+    for (var s = 0; s < total; s++){
+      (function(i){
+        var dot = document.createElement("button");
+        dot.className = "car-dot" + (i === 0 ? " active" : "");
+        dot.setAttribute("aria-label", "Ir para o caso " + (i + 1));
+        dot.setAttribute("aria-current", i === 0 ? "true" : "false");
+        dot.addEventListener("click", function(){ go(i); });
+        dotsWrap.appendChild(dot);
+      })(s);
+    }
+
+    prevBtn.addEventListener("click", function(){ go(idx - 1); });
+    nextBtn.addEventListener("click", function(){ go(idx + 1); });
+
+    var touchX = null;
+    var vp = car.querySelector(".car-viewport");
+    vp.addEventListener("touchstart", function(e){ touchX = e.touches[0].clientX; }, { passive: true });
+    vp.addEventListener("touchend", function(e){
+      if (touchX === null) return;
+      var dx = e.changedTouches[0].clientX - touchX;
+      if (dx < -40){ go(idx + 1); }
+      else if (dx > 40){ go(idx - 1); }
+      touchX = null;
+    }, { passive: true });
+  }
+
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (!reduce && typeof window.gsap !== "undefined" && typeof window.ScrollTrigger !== "undefined"){
+    gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+    document.documentElement.classList.add("has-gsap");
+
+    if (typeof ScrollSmoother !== "undefined"){
+      var smoother = ScrollSmoother.create({
+        wrapper: "#smooth-wrapper",
+        content: "#smooth-content",
+        smooth: 1.2,
+        smoothTouch: 0.1,
+        effects: false
+      });
+      window.smoother = smoother;
+
+    document.querySelectorAll('a[href^="#"]').forEach(function(link){
+      link.addEventListener("click", function(e){
+        var id = link.getAttribute("href");
+        if (id.length > 1){
+          var target = document.querySelector(id);
+          if (target){
+            e.preventDefault();
+            smoother.scrollTo(target, true, "top 80px");
+          }
+        }
+      });
+    });
+
+    /* ===== INTRO: luz acende + hero entra um a um ===== */
+    function getIntros(sel){
+      var list = gsap.utils.toArray(sel);
+      var arr = [];
+      list.forEach(function(el){
+        var p = el.parentElement;
+        var isReveal = el.classList.contains("reveal");
+        if (!isReveal) return;
+        var media = el.closest(".hero-media");
+        if (media) return;
+        arr.push(el);
+      });
+      return arr;
+    }
+
+    var introRed = document.querySelector("#intro .intro-glow");
+    gsap.delayedCall(0.55, function(){
+      document.documentElement.classList.add("hero-done");
+    });
+
+
+
+
+    gsap.timeline({ defaults: { ease: "power3.out" } })
+      .fromTo(introRed,
+        { scale: 0.18, autoAlpha: 0 },
+        { scale: 1, autoAlpha: 1, duration: 1.0, ease: "power2.inOut" })
+      .to("#intro", { autoAlpha: 0, duration: 0.9, ease: "power2.out" }, "+=1.6")
+      .fromTo(".hero-title",
+        { autoAlpha: 0, y: 34 },
+        { autoAlpha: 1, y: 0, duration: 0.9 }, "-=0.4")
+      .fromTo(".hero-sub",
+        { autoAlpha: 0, y: 26 },
+        { autoAlpha: 1, y: 0, duration: 0.8 }, "-=0.55")
+      .fromTo(".btn-primary",
+        { autoAlpha: 0, y: 20 },
+        { autoAlpha: 1, y: 0, duration: 0.7 }, "-=0.5")
+      .fromTo(".hero-points",
+        { autoAlpha: 0, y: 18 },
+        { autoAlpha: 1, y: 0, duration: 0.7 }, "-=0.5")
+      .fromTo(".hero-media",
+        { autoAlpha: 0, y: 24 },
+        { autoAlpha: 1, y: 0, duration: 0.9, ease: "power3.out" }, "-=0.55");
+  }
+
+    gsap.utils.toArray(".reveal").forEach(function(el){ if (el.closest("#hero")) return;
+      gsap.fromTo(el,
+        { autoAlpha: 0, y: 26 },
+        {
+          autoAlpha: 1, y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+    });
+
+    gsap.utils.toArray("[data-parallax]").forEach(function(f){
+      gsap.fromTo(f,
+        { yPercent: -4 },
+        {
+          yPercent: 4,
+          ease: "none",
+          scrollTrigger: {
+            trigger: f,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true
+          }
+        }
+      );
+    });
+
+    window.addEventListener("load", function(){ ScrollTrigger.refresh(); });
+    document.documentElement.classList.add("hero-done");
+    document.querySelectorAll(".reveal").forEach(function(el){ el.style.opacity = 1; });
+  }
+})();
+</script>
 </body>
 </html>
